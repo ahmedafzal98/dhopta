@@ -13,62 +13,37 @@ import {
 } from "react-native";
 import { carouselData } from "../data/data";
 import { useState } from "react";
+import Carousel from "react-native-snap-carousel";
 
 const Beranda = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const screenWidth = Dimensions.get("window").width;
 
-  const renderItem = ({ item, index }) => {
-    return (
-      <View>
-        <Image
-          source={item.image}
-          style={{
-            height: 200,
-            width: screenWidth, // Match screen width
-            resizeMode: "cover", // Or "contain", based on your preference
-          }}
-        />
-      </View>
-    );
-  };
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+      <Image source={item.image} style={styles.image} />
+    </View>
+  );
 
-  const renderDotIndicators = () => {
-    return carouselData.map((dot, index) => {
-      if (activeIndex === index) {
-        return (
-          <View
-            key={index}
-            style={{
-              backgroundColor: "#17367C",
-              height: 5,
-              width: 5,
-              borderRadius: 5,
-              marginHorizontal: 3,
-            }}
-          ></View>
-        );
-      } else {
-        return (
-          <View
-            key={index}
-            style={{
-              backgroundColor: "#D9D9D9",
-              height: 5,
-              width: 5,
-              borderRadius: 5,
-              marginHorizontal: 3,
-            }}
-          ></View>
-        );
-      }
-    });
-  };
+  // const Slider = ({ data }) => {
+  //   return (
+  //     <Carousel
+  //       data={data}
+  //       renderItem={renderItem}
+  //       sliderWidth={screenWidth}
+  //       itemWidth={screenWidth - 60}
+  //       layout="default"
+  //       onSnapToItem={(index) => setActiveIndex(index)}
+  //     />
+  //   );
+  // };
+
   const handleScroll = (event) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const index = Math.round(scrollPosition / screenWidth);
     setActiveIndex(index);
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#fff" barStyle="light-content" />
@@ -87,41 +62,31 @@ const Beranda = () => {
           <TextInput
             style={styles.input}
             placeholder="Find Nearby Services"
-            placeholderTextColor="rgba(0, 0, 0, 0.5)" // Optional for placeholder styling
+            placeholderTextColor="rgba(0, 0, 0, 0.5)"
           />
         </View>
       </View>
       <View style={styles.slider}>
-        <FlatList
+        <Slider
           data={carouselData}
+          sliderWidth={sliderWidth}
+          itemWidth={itemWidth}
           renderItem={renderItem}
-          horizontal
-          keyExtractor={(item) => item.id}
-          pagingEnabled
-          onScroll={handleScroll}
-          showsHorizontalScrollIndicator={false}
-          snapToAlignment="center" // Aligns slides to the center
-          snapToInterval={screenWidth} // Ensures snapping matches screen width
-          decelerationRate="fast" // Smooth snapping
         />
-
         <View
           style={{
             flexDirection: "row",
             justifyContent: "center",
             marginTop: 20,
           }}
-        >
-          {renderDotIndicators()}
-        </View>
+        ></View>
       </View>
       <View style={styles.serviceContainer}>
         <View>
           <Text style={{ fontSize: 14, margin: 20 }}>Janitorial Services</Text>
         </View>
         <View style={styles.serviceWrapper}>
-          <View style={styles.services}></View>
-
+          <View style={styles.services}>Ahemd</View>
           <View style={styles.services}></View>
           <View style={styles.services}></View>
           <View style={styles.services}></View>
@@ -130,16 +95,15 @@ const Beranda = () => {
     </SafeAreaView>
   );
 };
+
 export default Beranda;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ECEAED",
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : "auto",
   },
   searchContainer: {
-    // marginTop: 20,
     alignItems: "center",
     height: 150,
     backgroundColor: "#fff",
@@ -152,8 +116,8 @@ const styles = StyleSheet.create({
     height: 50,
   },
   inputContainer: {
-    flexDirection: "row", // Align items horizontally
-    alignItems: "center", // Align vertically in the center
+    flexDirection: "row",
+    alignItems: "center",
     borderColor: "rgba(0, 0, 0, 0.15)",
     borderWidth: 1,
     borderRadius: 5,
@@ -163,9 +127,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   icon: {
-    width: 20, // Adjust icon width
-    height: 20, // Adjust icon height
-    marginRight: 10, // Add spacing between icon and TextInput
+    width: 20,
+    height: 20,
+    marginRight: 10,
   },
   input: {
     flex: 1,
@@ -180,9 +144,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
     height: 230,
   },
+  image: {
+    width: "100%",
+    height: 200,
+    resizeMode: "cover",
+    borderRadius: 10,
+  },
+  card: {
+    borderRadius: 10,
+    overflow: "hidden",
+  },
   serviceContainer: {
     marginTop: 20,
-    flex: "row",
+    flexDirection: "row",
     justifyContent: "space-evenly",
     height: 180,
     backgroundColor: "#fff",
