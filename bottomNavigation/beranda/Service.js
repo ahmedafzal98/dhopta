@@ -62,8 +62,6 @@ export default Service;
 
 const styles = StyleSheet.create({
   serviceContainer: {
-    marginTop: 20,
-
     flexDirection: "column",
     justifyContent: "space-evenly",
     height: 180,

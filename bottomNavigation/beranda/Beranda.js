@@ -15,6 +15,7 @@ import Service from "../beranda/Service";
 import CommercialClean from "../beranda/CommercialClean";
 import Promotions from "../beranda/Promotions";
 import Slider from "./Slider/Slider";
+import { carouselData } from "../../data/data";
 const Beranda = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const screenWidth = Dimensions.get("window").width;
@@ -68,7 +69,7 @@ const Beranda = () => {
           </View>
         </View>
         <View style={styles.slider}>
-          <Slider />
+          <Slider itemList={carouselData} />
           {/* <Slider
           data={carouselData}
           sliderWidth={sliderWidth}
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "rgba(0, 0, 0, 0.15)",
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 20,
     height: 41,
     width: "90%",
     marginTop: 20,
