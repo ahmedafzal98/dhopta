@@ -44,3 +44,22 @@ export const carouselData = [
     image: require("../assets/sl_1.png"),
   },
 ];
+
+export const promotionSlides = [
+  {
+    id: "01",
+    image: require("../assets/promotion2.png"),
+  },
+  {
+    id: "02",
+    image: require("../assets/promotion1.png"),
+  },
+  {
+    id: "03",
+    image: require("../assets/promotion1.png"),
+  },
+  {
+    id: "04",
+    image: require("../assets/promotion1.png"),
+  },
+];

@@ -9,6 +9,7 @@ import { Image, Platform, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Beranda from "./beranda/Beranda";
 import { useEffect } from "react";
+import BerandaStackNavigator from "./beranda/BerandaStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -32,7 +33,7 @@ const BottomTab = () => {
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
         name="Home"
-        component={Beranda}
+        component={BerandaStackNavigator}
         options={{
           tabBarIcon: ({ focused }) => {
             return (

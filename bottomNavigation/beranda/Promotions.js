@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   Image,
@@ -7,9 +7,18 @@ import {
   Text,
   View,
 } from "react-native";
+import Pagination from "./Slider/Pagination";
 
 const { width } = Dimensions.get("screen");
-function Promotions(props) {
+
+function Promotions({ itemList }) {
+  const [paginationIndex, setPaginationIndex] = useState(0);
+
+  const onScrollHandler = (event) => {
+    const contentOffsetX = event.nativeEvent.contentOffset.x;
+    const index = Math.floor(contentOffsetX / (width / 3));
+    setPaginationIndex(index);
+  };
   return (
     <View style={styles.promotions}>
       <View>
@@ -17,13 +26,15 @@ function Promotions(props) {
       </View>
 
       <View style={styles.promotionContainer}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={styles.promotionsWrapper}>
-            <View style={styles.singlePromotion}>
-              <Image
-                style={{ width: "100%" }}
-                source={require("../../assets/promotion2.png")}
-              />
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          onScroll={onScrollHandler}
+          scrollEventThrottle={16}
+        >
+          {itemList.map((item, index) => (
+            <View key={index} style={styles.singlePromotion}>
+              <Image style={{ width: "100%" }} source={item.image} />
               <View style={styles.promotionDetail}>
                 <View style={{ flexDirection: "row", gap: 5 }}>
                   <View style={styles.package}>
@@ -78,164 +89,10 @@ function Promotions(props) {
                 </Text>
               </View>
             </View>
-            <View style={styles.singlePromotion}>
-              <Image source={require("../../assets/promotion1.png")} />
-              <View style={styles.promotionDetail}>
-                <View style={{ flexDirection: "row", gap: 5 }}>
-                  <View style={styles.package}>
-                    <Text style={{ fontSize: 6, textAlign: "center" }}>
-                      General Package
-                    </Text>
-                  </View>
-                </View>
-                <Text
-                  style={{
-                    fontSize: 10,
-                    marginTop: 5,
-                    width: "100%",
-                    fontWeight: 700,
-                  }}
-                >
-                  CleanHome HydroClean
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 8,
-                    color: "rgba(0,0,0,0.55)",
-                    marginTop: 5,
-                    width: "100%",
-                  }}
-                >
-                  Jasa vacuum tungau dan debu profesional untuk soft furniture.
-                  menggunakan teknologi HydroAllergenic System
-                </Text>
-                <View style={styles.promoCode}>
-                  <Image source={require("../../assets/promocode.png")} />
-                  <Text
-                    style={{ fontSize: 6, color: "#1D6F66", marginLeft: 5 }}
-                  >
-                    Promo
-                  </Text>
-                </View>
-                <Text
-                  style={{
-                    marginTop: 5,
-                    fontSize: 10,
-                    color: "rgba(0,0,0,0.6)",
-                  }}
-                >
-                  $200.000 /{" "}
-                  <Text style={{ color: "rgba(0,0,0,0.73)" }}> 60 min</Text>
-                </Text>
-              </View>
-            </View>
-            <View style={styles.singlePromotion}>
-              <Image source={require("../../assets/promotion1.png")} />
-              <View style={styles.promotionDetail}>
-                <View style={{ flexDirection: "row", gap: 5 }}>
-                  <View style={styles.package}>
-                    <Text style={{ fontSize: 6, textAlign: "center" }}>
-                      General Package
-                    </Text>
-                  </View>
-                </View>
-                <Text
-                  style={{
-                    fontSize: 10,
-                    marginTop: 5,
-                    width: "100%",
-                    fontWeight: 700,
-                  }}
-                >
-                  CleanHome HydroClean
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 8,
-                    color: "rgba(0,0,0,0.55)",
-                    marginTop: 5,
-                    // width: "100%",
-                  }}
-                >
-                  Jasa vacuum tungau dan debu profesional untuk soft furniture.
-                  menggunakan teknologi HydroAllergenic System
-                </Text>
-                <View style={styles.promoCode}>
-                  <Image source={require("../../assets/promocode.png")} />
-                  <Text
-                    style={{ fontSize: 6, color: "#1D6F66", marginLeft: 5 }}
-                  >
-                    Promo
-                  </Text>
-                </View>
-                <Text
-                  style={{
-                    marginTop: 5,
-                    fontSize: 10,
-                    color: "rgba(0,0,0,0.6)",
-                  }}
-                >
-                  $200.000 /{" "}
-                  <Text style={{ color: "rgba(0,0,0,0.73)" }}> 60 min</Text>
-                </Text>
-              </View>
-            </View>
-            <View style={styles.singlePromotion}>
-              <Image
-                source={require("../../assets/promotion1.png")}
-                style={{ resizeMode: "stretch" }}
-              />
-              <View style={styles.promotionDetail}>
-                <View style={{ flexDirection: "row", gap: 5 }}>
-                  <View style={styles.package}>
-                    <Text style={{ fontSize: 6, textAlign: "center" }}>
-                      General Package
-                    </Text>
-                  </View>
-                </View>
-                <Text
-                  style={{
-                    fontSize: 10,
-                    marginTop: 5,
-                    width: "100%",
-                    fontWeight: 700,
-                  }}
-                >
-                  CleanHome HydroClean
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 8,
-                    color: "rgba(0,0,0,0.55)",
-                    marginTop: 5,
-                    width: "100%",
-                  }}
-                >
-                  Jasa vacuum tungau dan debu profesional untuk soft furniture.
-                  menggunakan teknologi HydroAllergenic System
-                </Text>
-                <View style={styles.promoCode}>
-                  <Image source={require("../../assets/promocode.png")} />
-                  <Text
-                    style={{ fontSize: 6, color: "#1D6F66", marginLeft: 5 }}
-                  >
-                    Promo
-                  </Text>
-                </View>
-                <Text
-                  style={{
-                    marginTop: 5,
-                    fontSize: 10,
-                    color: "rgba(0,0,0,0.6)",
-                  }}
-                >
-                  $200.000 /{" "}
-                  <Text style={{ color: "rgba(0,0,0,0.73)" }}> 60 min</Text>
-                </Text>
-              </View>
-            </View>
-          </View>
+          ))}
         </ScrollView>
+
+        <Pagination items={itemList} paginationIndex={paginationIndex} />
       </View>
     </View>
   );
@@ -246,11 +103,10 @@ export default Promotions;
 const styles = StyleSheet.create({
   promotions: {
     marginTop: 20,
-    // height: 200,
     marginBottom: "20%",
   },
   promotionContainer: {
-    paddingVertical: 10,
+    marginLeft: 20,
   },
   promotionsWrapper: {
     flexDirection: "row", // Ensures horizontal alignment

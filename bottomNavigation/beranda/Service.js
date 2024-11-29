@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
   Image,
@@ -9,6 +10,7 @@ import {
 } from "react-native";
 
 function Service(props) {
+  const navigation = useNavigation();
   return (
     <View style={styles.serviceContainer}>
       <View>
@@ -17,7 +19,10 @@ function Service(props) {
       <View style={styles.allServices}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={styles.serviceWrapper}>
-            <TouchableOpacity style={styles.singleService}>
+            <TouchableOpacity
+              style={styles.singleService}
+              onPress={() => navigation.navigate("AppartmentBuildingClean")}
+            >
               <View style={styles.services}>
                 <Image source={require("../../assets/cleaning.png")} />
               </View>

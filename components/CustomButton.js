@@ -1,10 +1,20 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-function CustomButton({ onPress, text }) {
+function CustomButton({ onPress, text, disabled }) {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={{ color: "#fff", fontSize: 20, fontWeight: 800 }}>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={onPress}
+      disabled={disabled}
+    >
+      <Text
+        style={{
+          color: "#fff",
+          fontSize: 20,
+          fontWeight: 800,
+        }}
+      >
         {text}
       </Text>
     </TouchableOpacity>

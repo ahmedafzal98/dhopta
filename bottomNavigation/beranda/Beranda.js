@@ -15,7 +15,7 @@ import Service from "../beranda/Service";
 import CommercialClean from "../beranda/CommercialClean";
 import Promotions from "../beranda/Promotions";
 import Slider from "./Slider/Slider";
-import { carouselData } from "../../data/data";
+import { carouselData, promotionSlides } from "../../data/data";
 const Beranda = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const screenWidth = Dimensions.get("window").width;
@@ -25,25 +25,6 @@ const Beranda = () => {
       <Image source={item.image} style={styles.image} />
     </View>
   );
-
-  // const Slider = ({ data }) => {
-  //   return (
-  //     <Carousel
-  //       data={data}
-  //       renderItem={renderItem}
-  //       sliderWidth={screenWidth}
-  //       itemWidth={screenWidth - 60}
-  //       layout="default"
-  //       onSnapToItem={(index) => setActiveIndex(index)}
-  //     />
-  //   );
-  // };
-
-  const handleScroll = (event) => {
-    const scrollPosition = event.nativeEvent.contentOffset.x;
-    const index = Math.round(scrollPosition / screenWidth);
-    setActiveIndex(index);
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -87,7 +68,7 @@ const Beranda = () => {
 
         <Service />
         <CommercialClean />
-        <Promotions />
+        <Promotions itemList={promotionSlides} />
       </ScrollView>
     </SafeAreaView>
   );
